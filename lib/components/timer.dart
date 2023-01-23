@@ -173,10 +173,10 @@ class _PomodoroTimerState extends State<PomodoroTimer> {
     // Define the endtime
     _endTime = DateTime.now().millisecondsSinceEpoch + remainTime * 1000;
     LocalNotificationService().addNotification(
-      'Notification Title',
-      'Notification Body',
-      DateTime.now().millisecondsSinceEpoch + 1000,
-      channel: 'testing',
+      'Work Complete',
+      'Let\'s take some rest',
+      _endTime,
+      channel: 'work-end',
     );
     _startTimer();
   }

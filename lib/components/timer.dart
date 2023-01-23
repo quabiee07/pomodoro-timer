@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import '../app_styles.dart';
 import 'timer_panel.dart';
 
-const int kWorkDuration = 1500; // production: 25 minutes
-const int kRestDuration = 300; // production: 300 (5 minutes)
-const int kLongRestDuration = 900; // production: 900 (15 minutes)
+const int kWorkDuration = 5; //1500 production: 25 minutes
+const int kRestDuration = 2; //300 production: 300 (5 minutes)
+const int kLongRestDuration = 3; //900 production: 900 (15 minutes)
 const int kLongRestInterval = 4; // 4 short rest and then 1 long rest
 
 enum PomodoroState {
@@ -53,7 +53,6 @@ class _PomodoroTimerState extends State<PomodoroTimer> {
 
   Timer? _timer;
   int _endTime = -1;
-  
 
   @override
   void initState() {
@@ -208,7 +207,6 @@ class _PomodoroTimerState extends State<PomodoroTimer> {
         _stopTimer();
       }
     });
-    
   }
 
   void _stopTimer() {

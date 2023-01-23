@@ -53,7 +53,7 @@ class LocalNotificationService {
     // final iosDetail = IOSNotification();
     final noticeDetail = NotificationDetails(android: androidDetail);
 
-    final id = 0;
+    const id = 0;
 
     await _localNotificaationsPlugin.zonedSchedule(
         id, title, body, scheduleTime, noticeDetail,

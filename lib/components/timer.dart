@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:pomodoro_timer/services/local_notification_service.dart';
 import '../app_styles.dart';
 import 'timer_panel.dart';
 
@@ -171,6 +172,12 @@ class _PomodoroTimerState extends State<PomodoroTimer> {
 
     // Define the endtime
     _endTime = DateTime.now().millisecondsSinceEpoch + remainTime * 1000;
+    LocalNotificationService().addNotification(
+      'Notification Title',
+      'Notification Body',
+      DateTime.now().millisecondsSinceEpoch + 1000,
+      channel: 'testing',
+    );
     _startTimer();
   }
 

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tzData;
 
 class LocalNotificationService {
   static final LocalNotificationService _notificationService =
@@ -33,6 +35,27 @@ class LocalNotificationService {
     String sound = '',
     String channel = 'default',
   }) async {
+    tzData.initializeTimeZones();
+    final scheduleTime =
+        tz.TZDateTime.fromMillisecondsSinceEpoch(tz.local, endTime);
+
+    final androidDetail = AndroidNotificationDetails(channel, channel);
+
+    // final iosDetail = IOSNotification();
+    final noticeDetail = NotificationDetails(android: androidDetail);
+
+    final id = 0;
+
+    await _localNotificaationsPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      scheduleTime,
+      noticeDetail,
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+      androidAllowWhileIdle: true
+    );
+    
     print('addNotification() called: title=$title body=$body');
   }
 }

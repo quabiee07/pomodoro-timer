@@ -121,12 +121,14 @@ class _PomodoroTimerState extends State<PomodoroTimer> {
       // Discard
       // Next state: beingWork
       // #1
+      LocalNotificationService().cancelAllNotification;
       _endAtWork(false);
     } else if (_state == PomodoroState.beginRest) {
       enterAtRest();
     } else if (_state == PomodoroState.atRest) {
       // Discard
       // Next state: beingWork
+      LocalNotificationService().cancelAllNotification;
       _endAtRest();
     }
   }

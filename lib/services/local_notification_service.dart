@@ -38,8 +38,17 @@ class LocalNotificationService {
     tzData.initializeTimeZones();
     final scheduleTime =
         tz.TZDateTime.fromMillisecondsSinceEpoch(tz.local, endTime);
+    var soundFile = sound.replaceAll('.mp3', '');
 
-    final androidDetail = AndroidNotificationDetails(channel, channel);
+    final notificationSound =
+        sound == '' ? null : RawResourceAndroidNotificationSound(soundFile);
+
+    final androidDetail = AndroidNotificationDetails(
+      channel,
+      channel,
+      playSound: true,
+      sound: notificationSound,
+    );
 
     // final iosDetail = IOSNotification();
     final noticeDetail = NotificationDetails(android: androidDetail);
@@ -47,15 +56,15 @@ class LocalNotificationService {
     final id = 0;
 
     await _localNotificaationsPlugin.zonedSchedule(
-      id,
-      title,
-      body,
-      scheduleTime,
-      noticeDetail,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-      androidAllowWhileIdle: true
-    );
-    
+        id, title, body, scheduleTime, noticeDetail,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        androidAllowWhileIdle: true);
+
     print('addNotification() called: title=$title body=$body');
+  }
+
+  void cancelAllNotification() {
+    _localNotificaationsPlugin.cancelAll();
   }
 }
